@@ -57,7 +57,9 @@ for i, url in enumerate(df['map_url']):
        
         # 블로그 리뷰 텍스트 가져오기
         review_text_list = [] # 임시 선언
-        
+        review_text = ''
+        menu_text = ''
+
         # 네이버 지도 블로그 리뷰 탭은 동적 웹사이트의 순서가 주문하기, 메뉴보기 등의 존재 여부로 다르기 때문에 css selector가 아니라 element 찾기로 진행
         review_text_crawl_list = sub_driver.find_elements_by_class_name("_2CbII")        
         # find element's' 메소드를 통해 가져온 내용은 리스트로 저장되고, 리스트 타입을 풀어서(for문 사용) 임시 데이터에 모아 두어야 한다
@@ -65,6 +67,7 @@ for i, url in enumerate(df['map_url']):
             review_text_list.append(review_crawl_data.find_element_by_tag_name('div').text)        
         # 그 리스트에 저장된 텍스트 (한 식당에 대한 여러 리뷰들)를 한 텍스트 덩어리로 모아(join)줍니다.
         review_text = ','.join(review_text_list)
+        
 
         # 메뉴 찾기
         temp = sub_driver2.find_elements_by_class_name("_2CZ7z")
